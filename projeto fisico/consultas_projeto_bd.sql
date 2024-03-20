@@ -79,20 +79,6 @@ SELECT H.COD_HOTEL, H.NUM_HOTEL,
     (SELECT COUNT(*) FROM FUNCIONARIO F WHERE F.COD_HOTEL = H.COD_HOTEL) AS QTD_FUNCIONARIOS
 FROM HOTEL H
 
--- Exibir hospede com maior quantidade de telefones cadastrados
-SELECT H.CPF_HOSPEDE, COUNT(*) AS QTD
-FROM HOSPEDE H
-GROUP BY H.CPF_HOSPEDE
-HAVING COUNT(*) = (
-    SELECT MAX(QTD_COUNT)
-    FROM (
-        SELECT COUNT(*) AS QTD_COUNT
-        FROM TELEFONE_HOSPEDES TH 
-        GROUP BY TH.CPF_HOSPEDE
-    )
-)
-
-
 -- Subconsulta do tipo linha   
 --Exibir cpf do funcionário com a matrícula de crachá '987654321'
 SELECT C.CPF_FUNCIONARIO
