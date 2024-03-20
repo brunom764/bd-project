@@ -93,28 +93,14 @@ HAVING COUNT(*) = (
 )
 
 
--- Subconsulta do tipo linha
--- Exibir nome do gerente do hotel localizado no CEP 12345678 e número 111
-SELECT NOME_FUNCIONARIO
-FROM FUNCIONARIO
-WHERE (COD_HOTEL, CARGO_FUNCIONARIO) = (
-    SELECT COD_HOTEL, 'Gerente'
-    FROM HOTEL
-    WHERE NUM_HOTEL = 111 AND CEP_HOTEL = '12345678'
-)
-
--- Exibir os CPFs dos responsáveis que tiveram desconto de R$100 cada e ficaram hospedados do dia 30/12/2023 até 02/01/2024 no hotel de codigo 1 e no flat 3
-SELECT CPF_HOSPEDE FROM RESPONSAVEL_PAGA_HOSPEDAGEM RPH
-WHERE (RPH.COD_HOSPEDAGENS, RPH.COD_PROMOCAO) = (
-    SELECT H.COD_HOSPEDAGENS , P.COD_PROMOCAO
-    FROM HOSPEDAGENS H, PROMOCAO P
-    WHERE P.DESCONTO = '100.00' 
-    AND H.NUM_FLAT = 3 
-    AND H.DT_INIC = TO_DATE('2023-12-30 12:00:00') 
-    AND H.DT_FIM = TO_DATE('2024-01-02 12:00:00') 
-    AND H.COD_HOTEL = 1
-)
-    
+-- Subconsulta do tipo linha   
+--Exibir cpf do funcionário com a matrícula de crachá '987654321'
+SELECT C.CPF_FUNCIONARIO
+FROM CRACHA C
+WHERE C.MAT_CRACHA, C.DT_EMISSAO_CRACHA = (
+    SELECT MATRICULA, DATA_EMISSAO
+    FROM CRACHA
+    WHERE MAT_CRACHA = '987654321')    
 
 -- Subconsulta do tipo tabela
 -- Exibir nome dos hospedes que tem mais de 1 telefone cadastrado
