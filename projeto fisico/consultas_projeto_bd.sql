@@ -1,9 +1,8 @@
 -- Group by/Having
 -- Contagem de quantas hoteis tem mais de 5 flats
-SELECT H.COD_HOTEL, COUNT(F.NUM_FLAT) AS TOTAL_FLATS
-FROM HOTEL H
-JOIN FLATS F ON H.COD_HOTEL = F.COD_HOTEL
-GROUP BY H.COD_HOTEL
+SELECT F.COD_HOTEL, COUNT(F.NUM_FLAT) AS TOTAL_FLATS
+FROM FLAT F
+GROUP BY F.COD_HOTEL
 HAVING COUNT(F.NUM_FLAT) > 5
 
 -- Contagem de telefones por hospede que possui mais de 1 telefone
