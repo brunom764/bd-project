@@ -89,7 +89,7 @@ WHERE C.MAT_CRACHA, C.DT_EMISSAO_CRACHA = (
     WHERE MAT_CRACHA = '987654321')    
 
 -- Subconsulta do tipo tabela
--- exibir os CPFs dos hóspedes que ocuparam hospedagens em flats com status "Ocupado"
+-- exibir os CPFs dos hóspedes que ocupam hospedagens em flats com status "Ocupado"
 SELECT CPF_HOSPEDE
 FROM HOSPEDE_OCUPA_HOSPEDAGEM
 WHERE COD_HOSPEDAGENS IN (
