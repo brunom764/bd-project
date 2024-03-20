@@ -103,15 +103,18 @@ WHERE C.MAT_CRACHA, C.DT_EMISSAO_CRACHA = (
     WHERE MAT_CRACHA = '987654321')    
 
 -- Subconsulta do tipo tabela
--- Exibir nome dos hospedes que tem mais de 1 telefone cadastrado
-SELECT H.NOME_HOSPEDE
-FROM HOSPEDE H
-WHERE H.CPF_HOSPEDE IN (
-    SELECT TH.CPF_HOSPEDE
-    FROM TELEFONE_HOSPEDES TH
-    GROUP BY TH.CPF_HOSPEDE
-    HAVING COUNT(*) > 1
-)
+-- exibir os CPFs dos hóspedes que ocuparam hospedagens em flats com status "ocupado"
+SELECT CPF_HOSPEDE
+FROM HOSPEDE_OCUPA_HOSPEDAGEM
+WHERE COD_HOSPEDAGENS IN (
+    SELECT COD_HOSPEDAGENS
+    FROM HOSPEDAGENS
+    WHERE NUM_FLAT IN (
+        SELECT NUM_FLAT
+        FROM FLAT
+        WHERE STATUS_FLAT = 'ocupado'
+    )
+);
 
 
 --Operaçãoes de conjunto
